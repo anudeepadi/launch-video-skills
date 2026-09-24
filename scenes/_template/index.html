@@ -28,62 +28,65 @@
 <div id="stage">
   <div class="orb a"></div><div class="orb b"></div><div class="bg-grid"></div>
 
+  <!-- Shots are laid end to end by K.layout(). Each lasts as long as its voice lines + tail.
+       data-on="key" / "key:word" pins an element to the narration; --d is seconds from the shot's start. -->
+
   <!-- 1. Hook -->
-  <section class="shot" style="--in:0s; --out:2.9s">
-    <div class="display h1 center slam" style="--d:.15s">Your model is ready.</div>
-    <div class="display h1 center slam grad" style="--d:1.35s; margin-top:24px">Your inference isn't.</div>
+  <section class="shot" data-shot="hook">
+    <div class="display h1 center slam" data-on="h1" data-off="-0.1">Your model is ready.</div>
+    <div class="display h1 center slam grad" data-on="h2" data-off="-0.1" style="margin-top:24px">Your inference isn't.</div>
   </section>
 
-  <!-- 2. Problem -->
-  <section class="shot" style="--in:3.0s; --out:6.7s">
-    <div class="eyebrow up" style="--d:3.1s">Production today</div>
+  <!-- 2. Problem: each stat pops on the word that names it -->
+  <section class="shot" data-shot="problem">
+    <div class="eyebrow up" style="--d:.1s">Production today</div>
     <div class="stats">
-      <div class="card stat pop" style="--d:3.4s"><div class="v" id="s1">0</div><div class="k">p99 latency</div></div>
-      <div class="card stat pop" style="--d:3.7s"><div class="v" id="s2">0</div><div class="k">GPU idle</div></div>
-      <div class="card stat pop" style="--d:4.0s"><div class="v" id="s3">0</div><div class="k">monthly bill</div></div>
+      <div class="card stat pop" data-on="p1:latency"><div class="v" id="s1">0</div><div class="k">p99 latency</div></div>
+      <div class="card stat pop" data-on="p1:gpus"><div class="v" id="s2">0</div><div class="k">GPU idle</div></div>
+      <div class="card stat pop" data-on="p1:bill"><div class="v" id="s3">0</div><div class="k">monthly bill</div></div>
     </div>
   </section>
 
   <!-- 3. Reveal -->
-  <section class="shot" style="--in:6.9s; --out:8.9s; --in-dur:.01s">
-    <div class="eyebrow fade" style="--d:7.0s">Introducing</div>
-    <div class="logo blur" style="--d:7.05s; margin-top:36px">
+  <section class="shot" data-shot="reveal" style="--in-dur:.01s">
+    <div class="eyebrow fade" style="--d:.1s">Introducing</div>
+    <div class="logo blur" data-on="r1:relay" data-off="-0.05" style="margin-top:36px">
       <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h10M10 6l6 6-6 6M20 5v14"/></svg></div>
       <div class="display" style="font-size:170px">Relay</div>
     </div>
   </section>
 
-  <!-- 4. Product -->
-  <section class="shot" style="--in:9.0s; --out:13.6s">
-    <div class="display h4 up" style="--d:9.1s; margin-bottom:48px">One command. Any model. <span class="grad">Every GPU.</span></div>
-    <div class="term up" style="--d:9.3s">
+  <!-- 4. Product: typing is timed to finish just after the line ends -->
+  <section class="shot" data-shot="product">
+    <div class="display h4 up" style="--d:.1s; margin-bottom:48px">One command. Any model. <span class="grad">Every GPU.</span></div>
+    <div class="term up" style="--d:.3s">
       <div class="term-bar"><i></i><i></i><i></i><span>~/app</span></div>
       <div class="term-body" id="term"></div>
     </div>
   </section>
 
   <!-- 5. Proof -->
-  <section class="shot" style="--in:13.8s; --out:18.3s">
-    <div class="eyebrow up" style="--d:13.9s">Tokens / sec, llama-70b, 8×H100</div>
+  <section class="shot" data-shot="proof">
+    <div class="eyebrow up" style="--d:.1s">Tokens / sec, llama-70b, 8×H100</div>
     <div class="bars">
-      <div class="bar-row up" style="--d:14.1s"><span>baseline</span><div class="bar old grow-x" style="--d:14.3s; width:32%"></div><span id="b1">0</span></div>
-      <div class="bar-row up" style="--d:14.3s"><span class="ok">relay</span><div class="bar new grow-x" style="--d:14.6s; --dur:1.4s; width:100%"></div><span id="b2" class="ok">0</span></div>
+      <div class="bar-row up" style="--d:.3s"><span>baseline</span><div class="bar old grow-x" style="--d:.5s; width:32%"></div><span id="b1">0</span></div>
+      <div class="bar-row up" style="--d:.5s"><span class="ok">relay</span><div class="bar new grow-x" style="--d:.8s; --dur:1.4s; width:100%"></div><span id="b2" class="ok">0</span></div>
     </div>
     <div class="kpis">
-      <div class="kpi up" style="--d:15.8s"><div class="v grad" id="k1">0</div><div class="k">throughput</div></div>
-      <div class="kpi up" style="--d:16.1s"><div class="v grad" id="k2">0</div><div class="k">p99 latency</div></div>
-      <div class="kpi up" style="--d:16.4s"><div class="v grad" id="k3">0</div><div class="k">cost per token</div></div>
+      <div class="kpi up" data-on="m1:throughput"><div class="v grad" id="k1">0</div><div class="k">throughput</div></div>
+      <div class="kpi up" data-on="m1:latency"><div class="v grad" id="k2">0</div><div class="k">p99 latency</div></div>
+      <div class="kpi up" data-on="m1:cost"><div class="v grad" id="k3">0</div><div class="k">cost per token</div></div>
     </div>
   </section>
 
   <!-- 6. CTA -->
-  <section class="shot" style="--in:18.5s">
-    <div class="logo pop" style="--d:18.6s">
+  <section class="shot" data-shot="cta">
+    <div class="logo pop" data-on="c1" data-off="-0.1">
       <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h10M10 6l6 6-6 6M20 5v14"/></svg></div>
       <div class="display" style="font-size:150px">Relay</div>
     </div>
-    <div class="lead up" style="--d:19.1s; margin-top:40px">Inference that keeps up with your model.</div>
-    <div class="pill up" style="--d:19.5s; margin-top:48px">relay.dev</div>
+    <div class="lead up" data-on="c2" style="margin-top:40px">Inference that keeps up with your model.</div>
+    <div class="pill up" data-on="c2" data-edge="e" style="margin-top:48px">relay.dev</div>
   </section>
 
 </div>
@@ -97,40 +100,62 @@ const TERM = [
   '<span class="tok-f">▸</span> speculative decoding ....... <span class="ok">on</span>',
   '<span class="tok-f">▸</span> endpoint <span class="tok-s">https://api.relay.dev/v1/llama-70b</span>',
 ].join('\n');
-
-// typing sound cues generated from the same schedule as the visuals
-const typeCues = [];
-for (let t = 9.6; t < 12.4; t += 0.07) typeCues.push({ t: +t.toFixed(3), sfx: 'type', gain: 0.8 });
+const TERM_CHARS = TERM.replace(/<[^>]+>/g, '').length;
 
 window.SCENE = {
-  duration: 22,
   fps: 30,
-  music: { bpm: 120, gain: 0.9 },
-  cues: [
-    { t: 0.15, sfx: 'hit' }, { t: 1.35, sfx: 'hit' },
-    { t: 2.85, sfx: 'swoosh', gain: 0.7 },
-    { t: 3.4, sfx: 'pop' }, { t: 3.7, sfx: 'pop' }, { t: 4.0, sfx: 'pop' },
-    { t: 5.5, sfx: 'rise', gain: 0.9 },
-    { t: 6.9, sfx: 'boom' },
-    { t: 8.85, sfx: 'whoosh', gain: 0.7 },
-    ...typeCues,
-    { t: 13.7, sfx: 'whoosh', gain: 0.7 },
-    { t: 14.6, sfx: 'rise', gain: 0.5 },
-    { t: 15.8, sfx: 'chime', gain: 0.8 }, { t: 16.1, sfx: 'tick' }, { t: 16.4, sfx: 'tick' },
-    { t: 18.4, sfx: 'whoosh', gain: 0.7 }, { t: 18.6, sfx: 'boom', gain: 0.8 },
-  ],
-  onFrame(t) {
-    K.ambient(t);
-    K.count(K.$('#s1'), t, 3.4, 1.2, 0, 2.4, (v) => v.toFixed(1) + 's');
-    K.count(K.$('#s2'), t, 3.7, 1.2, 0, 61, (v) => Math.round(v) + '%');
-    K.count(K.$('#s3'), t, 4.0, 1.4, 0, 184, (v) => '$' + Math.round(v) + 'k');
-    K.type(K.$('#term'), TERM, t, 9.6, 95);
-    K.count(K.$('#b1'), t, 14.3, 1.0, 0, 1850);
-    K.count(K.$('#b2'), t, 14.6, 1.4, 0, 5760);
-    K.count(K.$('#k1'), t, 15.8, 1.0, 1, 3.1, (v) => v.toFixed(1) + '×');
-    K.count(K.$('#k2'), t, 16.1, 1.0, 2400, 180, (v) => Math.round(v) + 'ms');
-    K.count(K.$('#k3'), t, 16.4, 1.0, 0, 58, (v) => '−' + Math.round(v) + '%');
+  music: { style: 'pulse', bpm: 120, gain: 0.9 },
+  // The script drives the timeline. `say` overrides pronunciation; `pause` adds a silent beat.
+  voice: {
+    voice: 'af_heart', speed: 1.05, gap: 0.12, tail: 0.4, xfade: 0.1, outro: 0.3,
+    lines: [
+      { key: 'h1', shot: 'hook', text: 'Your model is ready.', at: 0.3 },
+      { key: 'h2', shot: 'hook', text: "Your inference isn't.", after: 0.35 },
+      { key: 'p1', shot: 'problem', text: 'Slow latency. Idle GPUs. A bill that keeps growing.', say: 'Slow latency. Idle G.P.U.s. A bill that keeps growing.', at: 0.4 },
+      { key: 'pp', shot: 'problem', pause: 0.6 },
+      { key: 'r1', shot: 'reveal', text: 'Meet Relay.', at: 0.2 },
+      { key: 'd1', shot: 'product', text: 'One command deploys any model, across all your GPUs.', say: 'One command deploys any model, across all your G.P.U.s.', at: 0.5 },
+      { key: 'dp', shot: 'product', pause: 1.0 },
+      { key: 'm1', shot: 'proof', text: 'Three times the throughput, lower latency, and less cost per token.', at: 0.6 },
+      { key: 'mp', shot: 'proof', pause: 0.6 },
+      { key: 'c1', shot: 'cta', text: 'Relay.', at: 0.3 },
+      { key: 'c2', shot: 'cta', text: 'Inference that keeps up with your model.', after: 0.25 },
+      { key: 'cp', shot: 'cta', pause: 1.4 },
+    ],
   },
+  // Cues pin SFX to lines/words ({on}), shot starts ({shot, t}), or absolute time ({t}).
+  cues: [
+    { on: 'h1', t: -0.1, sfx: 'hit' }, { on: 'h2', t: -0.1, sfx: 'hit' },
+    { shot: 'problem', t: 0, sfx: 'swoosh', gain: 0.6 },
+    { on: 'p1:latency', sfx: 'pop' }, { on: 'p1:gpus', sfx: 'pop' }, { on: 'p1:bill', sfx: 'pop' },
+    { on: 'r1:relay', t: -0.05, sfx: 'boom' },
+    { shot: 'product', t: 0, sfx: 'whoosh', gain: 0.6 },
+    { shot: 'proof', t: 0, sfx: 'whoosh', gain: 0.6 }, { shot: 'proof', t: 0.8, sfx: 'rise', gain: 0.5 },
+    { on: 'm1:throughput', sfx: 'chime', gain: 0.7 }, { on: 'm1:latency', sfx: 'tick' }, { on: 'm1:cost', sfx: 'tick' },
+    { shot: 'cta', t: -0.4, sfx: 'rise', gain: 0.4 }, { on: 'c1', t: -0.1, sfx: 'boom', gain: 0.8 },
+  ],
+};
+
+K.layout();
+
+// Beats derived from the laid-out timeline. Durations come from the real TTS clips when voiced,
+// estimates otherwise, so these constants stay correct after any script edit.
+const TYPE0 = K.shot('product').start + 0.6, TYPE1 = K.end('d1') + 0.4;
+const CPS = TERM_CHARS / (TYPE1 - TYPE0);
+for (let t = TYPE0; t < TYPE1; t += 0.07) SCENE.cues.push({ t: +t.toFixed(3), sfx: 'type', gain: 0.5 });
+const PROOF = K.shot('proof').start;
+
+SCENE.onFrame = (t) => {
+  K.ambient(t);
+  K.count(K.$('#s1'), t, K.at('p1', 'latency'), 1.2, 0, 2.4, (v) => v.toFixed(1) + 's');
+  K.count(K.$('#s2'), t, K.at('p1', 'gpus'), 1.2, 0, 61, (v) => Math.round(v) + '%');
+  K.count(K.$('#s3'), t, K.at('p1', 'bill'), 1.4, 0, 184, (v) => '$' + Math.round(v) + 'k');
+  K.type(K.$('#term'), TERM, t, TYPE0, CPS);
+  K.count(K.$('#b1'), t, PROOF + 0.5, 1.0, 0, 1850);
+  K.count(K.$('#b2'), t, PROOF + 0.8, 1.4, 0, 5760);
+  K.count(K.$('#k1'), t, K.at('m1', 'throughput'), 1.0, 1, 3.1, (v) => v.toFixed(1) + '×');
+  K.count(K.$('#k2'), t, K.at('m1', 'latency'), 1.0, 2400, 180, (v) => Math.round(v) + 'ms');
+  K.count(K.$('#k3'), t, K.at('m1', 'cost'), 1.0, 0, 58, (v) => '−' + Math.round(v) + '%');
 };
 </script>
 </body>

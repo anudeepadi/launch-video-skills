@@ -118,7 +118,7 @@ Helpers in `kit.js`: `K.prog`, `K.ease`, `K.lerp`, `K.clamp`, `K.type` (typewrit
 
 ## Scenes
 
-- `scenes/_template`: dark "inference startup" example. "Relay" and all its numbers are fictional placeholders.
+- `scenes/_template`: narrated 26 s "inference startup" example showing the voice-driven timeline (`data-shot`, `data-on`, `K.layout()`, derived typing and cues). "Relay" and all its numbers are fictional placeholders. `npx launch-video-skills new` copies it.
 
 ## License
 
