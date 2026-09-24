@@ -1,0 +1,19 @@
+{
+  "name": "launch-video-skills",
+  "version": "0.2.0",
+  "license": "MIT",
+  "type": "module",
+  "description": "Agent skill + renderer for SaaS launch videos: HTML/CSS scenes -> MP4 via Playwright + ffmpeg, local TTS. Works with Claude Code, Codex, Cursor, Gemini CLI, OpenCode.",
+  "keywords": ["agent-skills", "claude-code", "codex", "launch-video", "motion-graphics", "playwright", "ffmpeg"],
+  "repository": { "type": "git", "url": "git+https://github.com/anudeepadi/launch-video-skills.git" },
+  "homepage": "https://github.com/anudeepadi/launch-video-skills#readme",
+  "author": "Anudeep Adiraju",
+  "bin": { "launch-video-skills": "bin/cli.mjs" },
+  "files": ["bin/", "render.mjs", "lib/", "kit/", "scenes/_template/", "skills/", "requirements.txt"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "sheet": "node render.mjs --sheet 1",
+    "render": "node render.mjs"
+  },
+  "dependencies": { "playwright": "1.56.0" }
+}
